@@ -1,0 +1,20 @@
+#This is the initial scan I preform during most engagements. Works on Class B's Alter for others. Still work in progress
+#!/bin/bash
+set -e
+
+if [ "$1" == "" ]
+then
+	echo "Error: No IP Address"
+	echo "Ex - ./pingsweep.sh 192.168.1"
+else
+rm ~/Desktop/sweep.txt 
+
+for ip in `seq 1 254`; do
+
+	ping -c 1 $1.$ip | grep "64 bytes" | cut -d " " -f 4 | tr -d ":" | tee -a  ~/Desktop/sweep.txt & 
+done	
+	nmap --script=firewalk -sV -p 80 -Pn -iL ~/Desktop/sweep.txt | tee ~/Desktop/results.txt & 
+fi
+echo "Finished"
+exit 0
+
