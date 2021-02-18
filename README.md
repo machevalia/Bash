@@ -1,2 +1,2 @@
-# Bash
-Useful Bash Scripts/Alias'
+# SkratchPad
+Random little things I write
